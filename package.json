@@ -1,0 +1,27 @@
+{
+  "name": "confidential-market-research",
+  "version": "1.0.0",
+  "description": "Privacy-Protected Market Data Collection & Analysis using Zama FHE Technology",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -c-1 --cors",
+    "build": "echo 'No build step required for static files'",
+    "start": "npx http-server . -p 8080 -c-1 --cors"
+  },
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "fhe",
+    "zama",
+    "market-research",
+    "privacy",
+    "web3"
+  ],
+  "author": "Confidential Market Research Platform",
+  "license": "MIT",
+  "homepage": ".",
+  "repository": {
+    "type": "git",
+    "url": "."
+  }
+}

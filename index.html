@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confidential Market Research Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #fbc2eb;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #fbc2eb;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 194, 235, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+        }
+
+        .survey-item {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .survey-item:hover {
+            border-color: #fbc2eb;
+        }
+
+        .survey-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .survey-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .rating-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rating-label {
+            min-width: 120px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .rating-scale {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .rating-scale input[type="range"] {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .rating-value {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #fbc2eb;
+        }
+
+        .wallet-status {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #fbc2eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            color: #fbc2eb;
+            border-bottom-color: #fbc2eb;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .network-info {
+            background: #e2e3e5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rating-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .rating-label {
+                min-width: auto;
+                margin-bottom: 10px;
+            }
+
+            .tab-container {
+                flex-direction: column;
+            }
+
+            .tab {
+                border-bottom: 1px solid #e9ecef;
+                border-right: none;
+            }
+
+            .tab.active {
+                border-bottom-color: #fbc2eb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Confidential Market Research Platform</h1>
+            <p>Privacy-Protected Market Data Collection & Analysis using Zama FHE Technology</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Network Information -->
+            <div class="network-info">
+                <strong>Network:</strong> Ethereum Sepolia Testnet |
+                <strong>Contract:</strong> 0x4cf42D50595388736900c25680c149cb62669B47
+            </div>
+
+            <!-- Wallet Connection Status -->
+            <div id="walletStatus" class="wallet-status disconnected">
+                <span id="walletInfo">Please connect your MetaMask wallet</span>
+                <button onclick="connectWallet()" class="btn" id="connectBtn">Connect Wallet</button>
+            </div>
+
+            <!-- Main Statistics -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3 id="totalSurveys">0</h3>
+                    <p>Total Surveys</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="activeSurveys">0</h3>
+                    <p>Active Surveys</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalResponses">0</h3>
+                    <p>Total Responses</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="userParticipation">0</h3>
+                    <p>My Participation</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-container">
+                <button class="tab active" onclick="showTab('participate')">Participate</button>
+                <button class="tab" onclick="showTab('create')">Create Survey</button>
+                <button class="tab" onclick="showTab('manage')">Manage</button>
+                <button class="tab" onclick="showTab('insights')">Insights</button>
+            </div>
+
+            <!-- Participate Tab -->
+            <div id="participateTab" class="tab-content active">
+                <div class="section">
+                    <h2>📊 Available Market Research Surveys</h2>
+                    <div id="availableSurveys">
+                        <p>Loading available surveys...</p>
+                    </div>
+                </div>
+
+                <!-- Response Form -->
+                <div id="responseForm" class="section hidden">
+                    <h2>💭 Complete Survey Questionnaire</h2>
+                    <div class="form-group">
+                        <label>Survey Title:</label>
+                        <div id="currentSurveyTitle" style="font-weight: bold; color: #fbc2eb;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ageRange">Age Group *</label>
+                        <select id="ageRange" required>
+                            <option value="">Select age group</option>
+                            <option value="1">18-25 years</option>
+                            <option value="2">26-35 years</option>
+                            <option value="3">36-45 years</option>
+                            <option value="4">46-55 years</option>
+                            <option value="5">56-65 years</option>
+                            <option value="6">65+ years</option>
+                            <option value="7">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender *</label>
+                        <select id="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Other</option>
+                            <option value="4">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="incomeLevel">Income Level *</label>
+                        <select id="incomeLevel" required>
+                            <option value="">Select income level</option>
+                            <option value="1">Under $25,000</option>
+                            <option value="2">$25,000 - $50,000</option>
+                            <option value="3">$50,000 - $75,000</option>
+                            <option value="4">$75,000 - $100,000</option>
+                            <option value="5">Over $100,000</option>
+                            <option value="6">Prefer not to say</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Product/Service Rating (1-10) *</label>
+                        <div class="rating-container">
+                            <span class="rating-label">Overall Satisfaction:</span>
+                            <div class="rating-scale">
+                                <span>1</span>
+                                <input type="range" id="productRating" min="1" max="10" value="5" oninput="updateRatingDisplay('productRating', 'productRatingValue')">
+                                <span>10</span>
+                                <span id="productRatingValue" class="rating-value">5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Purchase Intent (1-5) *</label>
+                        <div class="rating-container">
+                            <span class="rating-label">Likelihood to Buy:</span>
+                            <div class="rating-scale">
+                                <span>Very Unlikely</span>
+                                <input type="range" id="purchaseIntent" min="1" max="5" value="3" oninput="updateRatingDisplay('purchaseIntent', 'purchaseIntentValue')">
+                                <span>Very Likely</span>
+                                <span id="purchaseIntentValue" class="rating-value">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Brand Awareness (1-5) *</label>
+                        <div class="rating-container">
+                            <span class="rating-label">Brand Familiarity:</span>
+                            <div class="rating-scale">
+                                <span>Never Heard</span>
+                                <input type="range" id="brandAwareness" min="1" max="5" value="3" oninput="updateRatingDisplay('brandAwareness', 'brandAwarenessValue')">
+                                <span>Very Familiar</span>
+                                <span id="brandAwarenessValue" class="rating-value">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="submitResponse()" class="btn" id="submitBtn">Submit Response</button>
+                    <button onclick="cancelResponse()" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Create Survey Tab -->
+            <div id="createTab" class="tab-content">
+                <div class="section">
+                    <h2>🆕 Create New Market Research Survey</h2>
+
+                    <div class="form-group">
+                        <label for="surveyTitle">Survey Title *</label>
+                        <input type="text" id="surveyTitle" placeholder="e.g., Smartphone Purchase Preference Survey" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surveyDuration">Survey Duration (hours) *</label>
+                        <input type="number" id="surveyDuration" min="1" max="168" value="24" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="maxResponses">Maximum Response Count *</label>
+                        <input type="number" id="maxResponses" min="1" max="10000" value="100" required>
+                    </div>
+
+                    <button onclick="createSurvey()" class="btn" id="createBtn">Create Survey</button>
+                </div>
+            </div>
+
+            <!-- Manage Surveys Tab -->
+            <div id="manageTab" class="tab-content">
+                <div class="section">
+                    <h2>🛠️ My Created Surveys</h2>
+                    <div id="mySurveys">
+                        <p>Loading your surveys...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Insights Tab -->
+            <div id="insightsTab" class="tab-content">
+                <div class="section">
+                    <h2>📈 Market Insights Analysis</h2>
+                    <div id="marketInsights">
+                        <p>Select a completed survey to view market insights...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.15.0/dist/ethers.umd.min.js"></script>
+    <script>
+        /**
+         * Confidential Market Research Platform
+         * Wallet Connection Implementation using ethers.js v6
+         *
+         * Features:
+         * - TypeScript-compatible ethers.js v6 implementation
+         * - MetaMask-only support with automatic detection
+         * - Auto-switching to Sepolia testnet
+         * - Type-safe contract interactions
+         * - Real-time connection status updates
+         */
+
+        // Global variables with type annotations (for documentation)
+        let provider; // ethers.BrowserProvider
+        let signer;   // ethers.JsonRpcSigner
+        let contract; // ethers.Contract
+        let userAccount; // string
+        let selectedSurveyId; // number
+
+        // Contract configuration
+        const CONTRACT_ADDRESS = "0x4cf42D50595388736900c25680c149cb62669B47";
+        const NETWORK_CONFIG = {
+            chainId: '0xaa36a7', // Sepolia testnet
+            chainName: 'Sepolia',
+            rpcUrls: ['https://sepolia.infura.io/v3/'],
+            blockExplorerUrls: ['https://sepolia.etherscan.io']
+        };
+
+        const CONTRACT_ABI = [
+            "function createSurvey(string memory _title, uint256 _duration, uint32 _maxResponses) external returns (uint32)",
+            "function submitResponse(uint32 _surveyId, uint32 _age, uint8 _gender, uint8 _income, uint8 _rating, uint8 _intent, uint8 _awareness) external",
+            "function getSurveyInfo(uint32 _surveyId) external view returns (string memory, uint256, uint256, bool, uint32, uint32, address)",
+            "function hasUserResponded(uint32 _surveyId, address _user) external view returns (bool)",
+            "function getTotalSurveys() external view returns (uint32)",
+            "function closeSurvey(uint32 _surveyId) external",
+            "function generateInsights(uint32 _surveyId) external",
+            "function getMarketInsights(uint32 _surveyId) external view returns (uint32, uint256, bool)",
+            "function getParticipantCount(uint32 _surveyId) external view returns (uint32)",
+            "event SurveyCreated(uint32 indexed surveyId, string title, address indexed creator)",
+            "event ResponseSubmitted(uint32 indexed surveyId, address indexed participant)",
+            "event SurveyCompleted(uint32 indexed surveyId, uint32 totalResponses)"
+        ];
+
+        // Connect wallet
+        async function connectWallet() {
+            const connectBtn = document.getElementById('connectBtn');
+            const originalText = connectBtn.textContent;
+
+            try {
+                // Step 1: Detect MetaMask
+                if (typeof window.ethereum === 'undefined') {
+                    showError('MetaMask not detected! Please install MetaMask browser extension.');
+                    return;
+                }
+
+                connectBtn.innerHTML = 'Connecting... <span class="loading"></span>';
+                connectBtn.disabled = true;
+
+                // Step 2: Request account access
+                showSuccess('Requesting wallet access...');
+                await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+                // Step 3: Network validation
+                showSuccess('Validating network connection...');
+                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+                if (chainId !== NETWORK_CONFIG.chainId) {
+                    showSuccess('Switching to Sepolia testnet...');
+                    try {
+                        // Step 4: Network switching
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: NETWORK_CONFIG.chainId }],
+                        });
+                    } catch (switchError) {
+                        if (switchError.code === 4902) {
+                            showSuccess('Adding Sepolia network...');
+                            await window.ethereum.request({
+                                method: 'wallet_addEthereumChain',
+                                params: [NETWORK_CONFIG],
+                            });
+                        } else {
+                            throw switchError;
+                        }
+                    }
+                }
+
+                // Step 5: Provider setup
+                showSuccess('Setting up provider and signer...');
+                provider = new ethers.BrowserProvider(window.ethereum);
+                signer = await provider.getSigner();
+                userAccount = await signer.getAddress();
+
+                // Step 6: Contract initialization
+                showSuccess('Initializing contract...');
+                contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
+
+                // Step 7: State update
+                updateWalletStatus(true);
+                showSuccess('Connected to Sepolia! ✅ Ready to use the platform.');
+
+                // Step 8: Load initial state
+                await loadData();
+
+            } catch (error) {
+                console.error('Failed to connect wallet:', error);
+                if (error.code === 4001) {
+                    showError('Connection rejected by user. Please try again.');
+                } else if (error.code === -32002) {
+                    showError('Connection request already pending. Please check MetaMask.');
+                } else {
+                    showError('Failed to connect wallet: ' + (error.message || 'Unknown error'));
+                }
+            } finally {
+                connectBtn.textContent = originalText;
+                connectBtn.disabled = false;
+            }
+        }
+
+        // Update wallet status
+        function updateWalletStatus(connected) {
+            const walletStatus = document.getElementById('walletStatus');
+            const walletInfo = document.getElementById('walletInfo');
+            const connectBtn = document.getElementById('connectBtn');
+
+            if (connected) {
+                walletStatus.className = 'wallet-status connected';
+                walletInfo.innerHTML = `
+                    <strong>✅ Wallet Connected</strong><br>
+                    <small>Account: ${userAccount.substring(0, 6)}...${userAccount.substring(38)}</small><br>
+                    <small>Network: Sepolia Testnet</small>
+                `;
+                connectBtn.style.display = 'none';
+            } else {
+                walletStatus.className = 'wallet-status disconnected';
+                walletInfo.innerHTML = `
+                    <strong>🔒 Wallet Not Connected</strong><br>
+                    <small>Please connect your MetaMask wallet to continue</small>
+                `;
+                connectBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Show tab
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active state from all tabs
+            const tabButtons = document.querySelectorAll('.tab');
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+
+            // Load corresponding data
+            if (tabName === 'participate') {
+                loadAvailableSurveys();
+            } else if (tabName === 'manage') {
+                loadMySurveys();
+            } else if (tabName === 'insights') {
+                loadMarketInsights();
+            }
+        }
+
+        // Update rating display
+        function updateRatingDisplay(inputId, displayId) {
+            const value = document.getElementById(inputId).value;
+            document.getElementById(displayId).textContent = value;
+        }
+
+        // Create survey
+        async function createSurvey() {
+            if (!contract) {
+                showError('Please connect your wallet first');
+                return;
+            }
+
+            try {
+                const title = document.getElementById('surveyTitle').value.trim();
+                const duration = parseInt(document.getElementById('surveyDuration').value);
+                const maxResponses = parseInt(document.getElementById('maxResponses').value);
+
+                if (!title || !duration || !maxResponses) {
+                    showError('Please fill in all required fields');
+                    return;
+                }
+
+                const btn = document.getElementById('createBtn');
+                const originalText = btn.textContent;
+                btn.innerHTML = 'Creating... <span class="loading"></span>';
+                btn.disabled = true;
+
+                const durationInSeconds = duration * 3600; // Convert to seconds
+                const tx = await contract.createSurvey(title, durationInSeconds, maxResponses);
+
+                showSuccess('Transaction submitted. Waiting for confirmation...');
+                await tx.wait();
+
+                showSuccess('Survey created successfully!');
+
+                // Clear form
+                document.getElementById('surveyTitle').value = '';
+                document.getElementById('surveyDuration').value = '24';
+                document.getElementById('maxResponses').value = '100';
+
+                // Refresh data
+                await loadData();
+
+                // Restore button
+                btn.textContent = originalText;
+                btn.disabled = false;
+
+            } catch (error) {
+                console.error('Failed to create survey:', error);
+                showError('Failed to create survey: ' + error.message);
+
+                // Restore button
+                const btn = document.getElementById('createBtn');
+                btn.textContent = 'Create Survey';
+                btn.disabled = false;
+            }
+        }
+
+        // Submit response
+        async function submitResponse() {
+            if (!contract) {
+                showError('Please connect your wallet first');
+                return;
+            }
+
+            try {
+                const age = parseInt(document.getElementById('ageRange').value);
+                const gender = parseInt(document.getElementById('gender').value);
+                const income = parseInt(document.getElementById('incomeLevel').value);
+                const rating = parseInt(document.getElementById('productRating').value);
+                const intent = parseInt(document.getElementById('purchaseIntent').value);
+                const awareness = parseInt(document.getElementById('brandAwareness').value);
+
+                if (!age || !gender || !income || !rating || !intent || !awareness) {
+                    showError('Please fill in all required fields');
+                    return;
+                }
+
+                const btn = document.getElementById('submitBtn');
+                const originalText = btn.textContent;
+                btn.innerHTML = 'Submitting... <span class="loading"></span>';
+                btn.disabled = true;
+
+                const tx = await contract.submitResponse(
+                    selectedSurveyId, age, gender, income, rating, intent, awareness
+                );
+
+                showSuccess('Transaction submitted. Waiting for confirmation...');
+                await tx.wait();
+
+                showSuccess('Response submitted successfully! Thank you for your participation!');
+
+                // Hide form
+                document.getElementById('responseForm').classList.add('hidden');
+
+                // Refresh data
+                await loadData();
+                await loadAvailableSurveys();
+
+                // Restore button
+                btn.textContent = originalText;
+                btn.disabled = false;
+
+            } catch (error) {
+                console.error('Failed to submit response:', error);
+                showError('Failed to submit response: ' + error.message);
+
+                // Restore button
+                const btn = document.getElementById('submitBtn');
+                btn.textContent = 'Submit Response';
+                btn.disabled = false;
+            }
+        }
+
+        // Cancel response
+        function cancelResponse() {
+            document.getElementById('responseForm').classList.add('hidden');
+            selectedSurveyId = null;
+        }
+
+        // Show response form
+        async function showResponseForm(surveyId, title) {
+            selectedSurveyId = surveyId;
+            document.getElementById('currentSurveyTitle').textContent = title;
+            document.getElementById('responseForm').classList.remove('hidden');
+
+            // Reset form
+            document.getElementById('ageRange').value = '';
+            document.getElementById('gender').value = '';
+            document.getElementById('incomeLevel').value = '';
+            document.getElementById('productRating').value = '5';
+            document.getElementById('purchaseIntent').value = '3';
+            document.getElementById('brandAwareness').value = '3';
+            updateRatingDisplay('productRating', 'productRatingValue');
+            updateRatingDisplay('purchaseIntent', 'purchaseIntentValue');
+            updateRatingDisplay('brandAwareness', 'brandAwarenessValue');
+
+            // Scroll to form
+            document.getElementById('responseForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Load all data
+        async function loadData() {
+            if (!contract) return;
+
+            try {
+                const totalSurveys = await contract.getTotalSurveys();
+                document.getElementById('totalSurveys').textContent = totalSurveys.toString();
+
+                let activeSurveys = 0;
+                let totalResponses = 0;
+                let userParticipation = 0;
+
+                for (let i = 1; i <= totalSurveys.toNumber(); i++) {
+                    try {
+                        const surveyInfo = await contract.getSurveyInfo(i);
+                        const [title, startTime, endTime, isActive, maxResponses, currentResponses] = surveyInfo;
+
+                        if (isActive) activeSurveys++;
+                        totalResponses += currentResponses.toNumber();
+
+                        const hasResponded = await contract.hasUserResponded(i, userAccount);
+                        if (hasResponded) userParticipation++;
+                    } catch (error) {
+                        console.error(`Error loading survey ${i}:`, error);
+                    }
+                }
+
+                document.getElementById('activeSurveys').textContent = activeSurveys.toString();
+                document.getElementById('totalResponses').textContent = totalResponses.toString();
+                document.getElementById('userParticipation').textContent = userParticipation.toString();
+
+            } catch (error) {
+                console.error('Failed to load data:', error);
+            }
+        }
+
+        // Load available surveys
+        async function loadAvailableSurveys() {
+            if (!contract) return;
+
+            try {
+                const totalSurveys = await contract.getTotalSurveys();
+                const surveysContainer = document.getElementById('availableSurveys');
+                surveysContainer.innerHTML = '';
+
+                if (totalSurveys.eq(0)) {
+                    surveysContainer.innerHTML = '<p>No surveys available at the moment.</p>';
+                    return;
+                }
+
+                let hasAvailableSurveys = false;
+
+                for (let i = 1; i <= totalSurveys.toNumber(); i++) {
+                    try {
+                        const surveyInfo = await contract.getSurveyInfo(i);
+                        const hasResponded = await contract.hasUserResponded(i, userAccount);
+
+                        const [title, startTime, endTime, isActive, maxResponses, currentResponses] = surveyInfo;
+
+                        if (isActive && !hasResponded && currentResponses.lt(maxResponses)) {
+                            const surveyElement = createSurveyElement(i, title, startTime, endTime, isActive, maxResponses, currentResponses, false);
+                            surveysContainer.appendChild(surveyElement);
+                            hasAvailableSurveys = true;
+                        }
+                    } catch (error) {
+                        console.error(`Failed to load survey ${i}:`, error);
+                    }
+                }
+
+                if (!hasAvailableSurveys) {
+                    surveysContainer.innerHTML = '<p>No available surveys to participate in.</p>';
+                }
+
+            } catch (error) {
+                console.error('Failed to load available surveys:', error);
+                document.getElementById('availableSurveys').innerHTML = '<p>Failed to load surveys.</p>';
+            }
+        }
+
+        // Load my surveys
+        async function loadMySurveys() {
+            if (!contract) return;
+
+            try {
+                const totalSurveys = await contract.getTotalSurveys();
+                const surveysContainer = document.getElementById('mySurveys');
+                surveysContainer.innerHTML = '';
+
+                if (totalSurveys.eq(0)) {
+                    surveysContainer.innerHTML = '<p>You haven\'t created any surveys yet.</p>';
+                    return;
+                }
+
+                let hasMySurveys = false;
+
+                for (let i = 1; i <= totalSurveys.toNumber(); i++) {
+                    try {
+                        const surveyInfo = await contract.getSurveyInfo(i);
+                        const [title, startTime, endTime, isActive, maxResponses, currentResponses, creator] = surveyInfo;
+
+                        if (creator.toLowerCase() === userAccount.toLowerCase()) {
+                            const surveyElement = createSurveyElement(i, title, startTime, endTime, isActive, maxResponses, currentResponses, true);
+                            surveysContainer.appendChild(surveyElement);
+                            hasMySurveys = true;
+                        }
+                    } catch (error) {
+                        console.error(`Failed to load survey ${i}:`, error);
+                    }
+                }
+
+                if (!hasMySurveys) {
+                    surveysContainer.innerHTML = '<p>You haven\'t created any surveys yet.</p>';
+                }
+
+            } catch (error) {
+                console.error('Failed to load your surveys:', error);
+                document.getElementById('mySurveys').innerHTML = '<p>Failed to load surveys.</p>';
+            }
+        }
+
+        // Create survey element
+        function createSurveyElement(id, title, startTime, endTime, isActive, maxResponses, currentResponses, isOwner) {
+            const div = document.createElement('div');
+            div.className = 'survey-item';
+
+            const statusClass = isActive ? 'status-active' : 'status-closed';
+            const statusText = isActive ? 'Active' : 'Closed';
+
+            const startDate = new Date(startTime.toNumber() * 1000).toLocaleString();
+            const endDate = new Date(endTime.toNumber() * 1000).toLocaleString();
+
+            const progress = maxResponses.gt(0) ? (currentResponses.toNumber() / maxResponses.toNumber() * 100).toFixed(1) : 0;
+
+            div.innerHTML = `
+                <div class="survey-title">${escapeHtml(title)}</div>
+                <div class="survey-meta">
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                    <span>Responses: ${currentResponses}/${maxResponses} (${progress}%)</span>
+                </div>
+                <div class="survey-meta">
+                    Start: ${startDate}<br>
+                    End: ${endDate}
+                </div>
+                <div style="margin-top: 15px;">
+                    ${!isOwner && isActive ? `<button onclick="showResponseForm(${id}, '${escapeHtml(title)}')" class="btn">Participate</button>` : ''}
+                    ${isOwner && isActive ? `<button onclick="closeSurvey(${id})" class="btn btn-secondary">Close Survey</button>` : ''}
+                    ${isOwner && !isActive ? `<button onclick="generateInsights(${id})" class="btn">Generate Insights</button>` : ''}
+                </div>
+            `;
+
+            return div;
+        }
+
+        // Close survey
+        async function closeSurvey(surveyId) {
+            if (!confirm('Are you sure you want to close this survey?')) return;
+
+            try {
+                const tx = await contract.closeSurvey(surveyId);
+                showSuccess('Transaction submitted. Waiting for confirmation...');
+                await tx.wait();
+                showSuccess('Survey closed successfully');
+                await loadMySurveys();
+                await loadData();
+            } catch (error) {
+                console.error('Failed to close survey:', error);
+                showError('Failed to close survey: ' + error.message);
+            }
+        }
+
+        // Generate insights
+        async function generateInsights(surveyId) {
+            try {
+                const tx = await contract.generateInsights(surveyId);
+                showSuccess('Transaction submitted. Waiting for confirmation...');
+                await tx.wait();
+                showSuccess('Insights generated successfully!');
+                await loadMarketInsights();
+            } catch (error) {
+                console.error('Failed to generate insights:', error);
+                showError('Failed to generate insights: ' + error.message);
+            }
+        }
+
+        // Load market insights
+        async function loadMarketInsights() {
+            if (!contract) return;
+
+            try {
+                const insightsContainer = document.getElementById('marketInsights');
+                insightsContainer.innerHTML = '<p>Loading market insights...</p>';
+
+                // This would implement actual insights loading logic
+                insightsContainer.innerHTML = '<p>Insights feature is under development. Please check back later.</p>';
+
+            } catch (error) {
+                console.error('Failed to load market insights:', error);
+                document.getElementById('marketInsights').innerHTML = '<p>Failed to load insights.</p>';
+            }
+        }
+
+        // Utility functions
+        function showError(message) {
+            removeMessages();
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            document.querySelector('.main-content').insertBefore(errorDiv, document.querySelector('.stats-grid'));
+            setTimeout(removeMessages, 5000);
+        }
+
+        function showSuccess(message) {
+            removeMessages();
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            document.querySelector('.main-content').insertBefore(successDiv, document.querySelector('.stats-grid'));
+            setTimeout(removeMessages, 5000);
+        }
+
+        function removeMessages() {
+            const messages = document.querySelectorAll('.error-message, .success-message');
+            messages.forEach(msg => msg.remove());
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event listeners
+        window.addEventListener('load', async () => {
+            console.log('🚀 Confidential Market Research Platform initialized');
+
+            // Check if wallet is already connected
+            if (typeof window.ethereum !== 'undefined') {
+                console.log('✅ MetaMask detected');
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+                    if (accounts.length > 0) {
+                        console.log('📱 Existing wallet connection found, reconnecting...');
+                        showSuccess('Reconnecting to existing wallet...');
+                        await connectWallet();
+                    } else {
+                        console.log('🔒 No existing wallet connection');
+                    }
+                } catch (error) {
+                    console.error('Failed to check wallet connection:', error);
+                    showError('Failed to check existing wallet connection');
+                }
+            } else {
+                console.log('❌ MetaMask not detected');
+                showError('MetaMask not detected. Please install MetaMask browser extension.');
+            }
+
+            // Listen for account changes
+            if (window.ethereum) {
+                window.ethereum.on('accountsChanged', (accounts) => {
+                    console.log('👤 Account changed:', accounts);
+                    if (accounts.length === 0) {
+                        showSuccess('Wallet disconnected');
+                        updateWalletStatus(false);
+                        userAccount = null;
+                        contract = null;
+                        provider = null;
+                        signer = null;
+                    } else {
+                        showSuccess('Account changed, reconnecting...');
+                        connectWallet();
+                    }
+                });
+
+                window.ethereum.on('chainChanged', (chainId) => {
+                    console.log('🔗 Network changed:', chainId);
+                    showSuccess('Network changed, reloading...');
+                    setTimeout(() => window.location.reload(), 1000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
